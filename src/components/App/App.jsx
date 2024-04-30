@@ -1,14 +1,14 @@
-import { Layout } from "../Layout/Layout";
-import { AppBar } from "../AppBar/AppBar";
-import { TaskForm } from "../TaskForm/TaskForm";
-import { TaskList } from "../TaskList/TaskList";
+import { useSelector } from "react-redux";
+import LangSwitcher from "../LangSwitcher/LangSwitcher";
+import Balance from "./Balance/Balance";
 
-export const App = () => {
+export default function App() {
+  const lang = useSelector((state) => state.local.lang);
   return (
-    <Layout>
-      <AppBar />
-      <TaskForm />
-      <TaskList />
-    </Layout>
+    <div>
+      <Balance />
+      <LangSwitcher />
+      <p>Selected lang: {lang}</p>
+    </div>
   );
-};
+}
