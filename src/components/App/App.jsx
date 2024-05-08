@@ -1,14 +1,27 @@
-import { useSelector } from "react-redux";
-import LangSwitcher from "../LangSwitcher/LangSwitcher";
-import Balance from "./Balance/Balance";
+import Error from "../Error/Error";
+import Loader from "../Loader/Loader";
+import { useEffect } from "react";
+import ContactList from "../ContactList/ContactList";
+import { fetchContacts } from "../../redux/contactsOps";
+import { useDispatch, useSelector } from "react-redux";
+import ContactForm from "../ContactForm/ContactForm";
 
 export default function App() {
-  const lang = useSelector((state) => state.local.lang);
+  const loading = useSelector((state) => state.contacts.loading);
+  const error = useSelector((state) => state.contacts.error);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
   return (
     <div>
-      <Balance />
-      <LangSwitcher />
-      <p>Selected lang: {lang}</p>
+      <h1>HTTP</h1>
+      <ContactForm />
+      {error && <Error />}
+      {loading && <Loader />}
+      <ContactList />
     </div>
   );
 }

@@ -1,10 +1,9 @@
-import { combineReducers, createStore } from "redux";
-import { balanceReducer } from "./balance";
-import { localeReducer } from "./local";
+import { configureStore } from "@reduxjs/toolkit";
 
-const rootReducer = combineReducers({
-  balance: balanceReducer,
-  local: localeReducer,
+import contactsReducer from "./contactsSlice";
+
+export const store = configureStore({
+  reducer: {
+    contacts: contactsReducer,
+  },
 });
-
-export const store = createStore(rootReducer);
